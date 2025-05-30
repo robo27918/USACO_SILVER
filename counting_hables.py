@@ -39,10 +39,13 @@ def count_nums_in_range(nums,query_range):
 
 def main():
     nums,ranges =read_input("haybales.in")
-    #for loop to go thru all the queries 
-    for range in ranges:
-        print(count_nums_in_range(nums,range))
-    
+
+    #for loop to go thru all the queries
+    with open("haybales.out",'w') as file:
+        for range in ranges:
+            file.write(str(count_nums_in_range(nums,range)) +"\n")
+    file.close()
+        
 
 if __name__ == "__main__":
     main()
