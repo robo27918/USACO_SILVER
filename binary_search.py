@@ -119,10 +119,13 @@ def run_tests():
         ([2, 4, 6, 8], 8, 4),
         ([2, 4, 6, 8], 2, 1),
     ]
+    print("---left binary search test")
     for i, (nums, target, expected) in enumerate(test_cases, 1):
         result = least_greater(nums, target)
         assert result == expected, f"Test {i} failed: expected {expected}, got {result}"
     print("All tests passed!")
+
+    print("\n---right binary search test---")
 
 run_tests()
 

@@ -39,28 +39,74 @@ def l_binary_search(nums,target):
     '''
     l = 0
     r = len(nums)-1
+    idx = -1
     while l <=r:
         mid = (l+r)//2
         if nums[mid]<target:
-            pass
-        elif nums[mid] > target:
-            pass
-        else:
-            return mid
+            l = mid +1
+        elif nums[mid] >= target:
+            r = mid -1
+        # else:
+        #     return mid
+    
     return l
 
-
- 
+def r_binary_search(nums,target):
+    '''
+        returns the index where target should be inserted, or the index of the last occurence
+    '''
 
 def main():
-    nums,ranges =read_input("haybales.in")
+    # nums,ranges =read_input("haybales.in")
 
-    #for loop to go thru all the queries
-    with open("haybales.out",'w') as file:
-        for range in ranges:
-            file.write(str(count_nums_in_range(nums,range)) +"\n")
-    file.close()
+    # #for loop to go thru all the queries
+    # with open("haybales.out",'w') as file:
+    #     for range in ranges:
+    #         file.write(str(count_nums_in_range(nums,range)) +"\n")
+    # file.close()
+    run_tests()
+  
+
+def run_tests():
+    test_cases = [
+        # x exists in the list
+    ([1, 3, 3, 5, 7], 3, 1),
+    
+    # x is smaller than all elements
+    ([10, 20, 30], 5, 0),
+    
+    # x is larger than all elements
+    ([1, 2, 3], 10, 3),
+    
+    # x would go in the middle
+    ([1, 2, 4, 5], 3, 2),
+    
+    # empty list
+    ([], 42, 0),
+    
+    # all elements equal to x
+    ([5, 5, 5, 5], 5, 0),
+    
+    # duplicates, x not in list
+    ([1, 2, 4, 4, 6], 3, 2),
+    
+    # another valid test
+    ([1, 3, 5, 7, 9], 4, 2),
+    
+    # x less than all duplicates
+    ([3, 3, 3, 3], 2, 0),
+    
+    # x greater than all duplicates
+    ([3, 3, 3, 3], 4, 4),
         
+
+    ]
+    print("---left binary search test")
+    for i, (nums, target, expected) in enumerate(test_cases, 1):
+        result = l_binary_search(nums, target)
+        assert result == expected, f"Test {i} failed: expected {expected}, got {result}"
+    print("All tests passed!")
+    print("---right binary search test")       
 
 if __name__ == "__main__":
     main()
