@@ -26,13 +26,14 @@ def count_nums_in_range(nums,query_range):
             nums list
         3. iterate thru the range to do a check if i
     '''
-    nums = set(nums)
-    counter = 0
+    # nums = set(nums)
+    # counter = 0
     l,u = query_range[0],query_range[1]
-    for n in range(l,u+1):
-        if n in nums:
-            counter +=1
-    return counter
+    # for n in range(l,u+1):
+    #     if n in nums:
+    #         counter +=1
+    # return counter
+    return r_binary_search(nums,u)- l_binary_search(nums,l)
 def l_binary_search(nums,target):
     '''
         returns the index where x should be inserted, or the index of the first occurence
@@ -53,7 +54,7 @@ def l_binary_search(nums,target):
 
 def r_binary_search(nums,target):
     '''
-        returns the index where target should be inserted at the end, or the index of the last occurence
+        returns the index where target should be inserted at the end
     '''
     if not nums:
         return 0
@@ -66,19 +67,16 @@ def r_binary_search(nums,target):
             l = mid +1
         elif nums[mid] > target:
             r = mid-1
-   
-    if nums[r] == target:
-        return r
     return l
 
 def main():
-    # nums,ranges =read_input("haybales.in")
+    nums,ranges =read_input("haybales.in")
 
-    # #for loop to go thru all the queries
-    # with open("haybales.out",'w') as file:
-    #     for range in ranges:
-    #         file.write(str(count_nums_in_range(nums,range)) +"\n")
-    # file.close()
+    #for loop to go thru all the queries
+    with open("haybales.out",'w') as file:
+        for range in ranges:
+            file.write(str(count_nums_in_range(nums,range)) +"\n")
+   
     # run_tests()
   
 
