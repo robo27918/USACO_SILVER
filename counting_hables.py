@@ -5,7 +5,7 @@ def read_input(file):
     lines = [line.strip('\n') for line in open(file,'r')]
     n,q = lines[0].split()
     n,q= int(n), int(q)
-    print(lines[1])
+   
     #convert nums to numerical values for comparison
     nums = [int(num) for num in lines[1].split()]
     #sort nums for use in binary search
@@ -19,17 +19,29 @@ def read_input(file):
             
 
 
-def count_nums_in_range(nums,range):
-    #TODO: implement binary search to count
-    # the occurence of each number within the range
-    lower,upper = range[0],range[1]
+def count_nums_in_range(nums,query_range):
+    '''
+        1.turn nums into set for quick look up
+        2. create a counter varible to track how many of the numbers in the range are actually in
+            nums list
+        3. iterate thru the range to do a check if i
+    '''
+    nums = set(nums)
+    counter = 0
+    l,u = query_range[0],query_range[1]
+    for n in range(l,u+1):
+        if n in nums:
+            counter +=1
+    return counter
     
 
  
 
 def main():
-    nums,ranges =read_input("counting_hables.txt")
-    
+    nums,ranges =read_input("haybales.in")
+    #for loop to go thru all the queries 
+    for range in ranges:
+        print(count_nums_in_range(nums,range))
     
 
 if __name__ == "__main__":
