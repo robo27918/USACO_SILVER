@@ -33,7 +33,22 @@ def count_nums_in_range(nums,query_range):
         if n in nums:
             counter +=1
     return counter
-    
+def l_binary_search(nums,target):
+    '''
+        returns the index where x should be inserted, or the index of the first occurence
+    '''
+    l = 0
+    r = len(nums)-1
+    while l <=r:
+        mid = (l+r)//2
+        if nums[mid]<target:
+            pass
+        elif nums[mid] > target:
+            pass
+        else:
+            return mid
+    return l
+
 
  
 
