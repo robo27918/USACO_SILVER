@@ -53,8 +53,23 @@ def l_binary_search(nums,target):
 
 def r_binary_search(nums,target):
     '''
-        returns the index where target should be inserted, or the index of the last occurence
+        returns the index where target should be inserted at the end, or the index of the last occurence
     '''
+    if not nums:
+        return 0
+    
+    l = 0
+    r = len(nums)-1
+    while l <=r:
+        mid = (l + r)//2
+        if nums[mid]<=target:
+            l = mid +1
+        elif nums[mid] > target:
+            r = mid-1
+   
+    if nums[r] == target:
+        return r
+    return l
 
 def main():
     # nums,ranges =read_input("haybales.in")
@@ -64,7 +79,7 @@ def main():
     #     for range in ranges:
     #         file.write(str(count_nums_in_range(nums,range)) +"\n")
     # file.close()
-    run_tests()
+    # run_tests()
   
 
 def run_tests():
@@ -101,12 +116,49 @@ def run_tests():
         
 
     ]
+
+    r_test_cases = [
+        # target exists multiple times, return last occurrence
+        ([1, 3, 3, 3, 5, 7, 8], 3, 3),
+
+        # target exists once
+        ([1, 3, 5, 7, 9], 5, 2),
+
+        # target would be inserted in the middle
+        ([1, 3, 5, 7, 9], 4, 2),
+
+        # target less than all elements
+        ([10, 20, 30], 5, 0),
+
+        # target greater than all elements
+        ([1, 2, 3], 10, 3),
+
+        # empty list
+        ([], 42, 0),
+
+        # all elements equal to target
+        ([5, 5, 5, 5], 5, 3),
+
+        # all elements equal but target is different
+        ([5, 5, 5, 5], 6, 4),
+        ([5, 5, 5, 5], 4, 0),
+
+        # target between duplicates
+        ([1, 2, 4, 4, 6], 3, 2),
+
+        # target not in list, should go between
+        ([1, 2, 4, 4, 6], 5, 4),
+    ]
     print("---left binary search test")
     for i, (nums, target, expected) in enumerate(test_cases, 1):
         result = l_binary_search(nums, target)
         assert result == expected, f"Test {i} failed: expected {expected}, got {result}"
     print("All tests passed!")
-    print("---right binary search test")       
+    print("\n---right binary search test")
+    for i, (nums, target, expected) in enumerate(r_test_cases, 1):
+        result = r_binary_search(nums, target)
+        assert result == expected, f"Test {i} failed: expected {expected}, got {result}"
+    print("All tests passed!")       
 
 if __name__ == "__main__":
     main()
